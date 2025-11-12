@@ -17,7 +17,8 @@ export default async function AdminDashboard() {
   // Check if user is admin
   const { data: profile } = await supabase.from("profiles").select("role").eq("id", user.id).single()
 
-  console.log(profile)
+  console.log("Profile:", profile)
+  console.log("User:", user)
 
   if (!profile || profile.role !== "admin") {
     redirect("/")
