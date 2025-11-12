@@ -69,12 +69,13 @@ export default async function ProductDetailPage({
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Product Image */}
               <div className="space-y-4">
-                <div className="aspect-square relative overflow-hidden rounded-xl bg-secondary/30 border border-border/50">
+                <div className="aspect-square relative overflow-hidden rounded-2xl bg-gradient-to-br from-secondary/30 to-accent/20 border border-border/50 shadow-2xl group">
                   <img
                     src={product.image_url || "/placeholder.svg?height=600&width=600"}
                     alt={product.name}
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
                 </div>
               </div>
 
@@ -174,28 +175,34 @@ export default async function ProductDetailPage({
                 {relatedProducts.map((relatedProduct) => (
                   <Card
                     key={relatedProduct.id}
-                    className="border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg overflow-hidden group"
+                    className="border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 overflow-hidden group bg-gradient-to-br from-card to-card/80"
                   >
-                    <Link href={`/products/${relatedProduct.id}`}>
-                      <div className="aspect-square relative overflow-hidden bg-secondary/30">
+                    <Link href={`/products/${relatedProduct.id}`} className="block">
+                      <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-secondary/30 to-accent/20">
                         <img
                           src={relatedProduct.image_url || "/placeholder.svg?height=400&width=400"}
                           alt={relatedProduct.name}
-                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                          className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                       <CardContent className="pt-5 pb-5 space-y-3">
                         <div className="space-y-2">
-                          <p className="text-xs font-medium text-primary uppercase tracking-wide">
-                            {relatedProduct.category}
-                          </p>
-                          <h3 className="text-base font-semibold text-foreground line-clamp-1">
+                          <div className="flex items-center gap-2">
+                            <div className="h-1 w-1 bg-primary rounded-full" />
+                            <p className="text-xs font-bold text-primary uppercase tracking-wider">
+                              {relatedProduct.category}
+                            </p>
+                          </div>
+                          <h3 className="text-base font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
                             {relatedProduct.name}
                           </h3>
                         </div>
-                        <div className="flex items-center justify-between pt-2">
-                          <span className="text-xl font-bold text-primary">{relatedProduct.price.toFixed(2)} €</span>
-                          <Button size="sm" variant="outline">
+                        <div className="flex items-center justify-between pt-3 border-t border-border/50">
+                          <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                            {relatedProduct.price.toFixed(2)} €
+                          </span>
+                          <Button size="sm" variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                             Voir
                           </Button>
                         </div>

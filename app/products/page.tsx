@@ -48,19 +48,34 @@ export default async function ProductsPage({
         <section className="w-full py-12 md:py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             {/* Category Filters */}
-            <div className="mb-8 flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                <Filter className="h-4 w-4" />
-                <span>Catégories:</span>
-              </div>
-              <Button asChild variant={!params.category ? "default" : "outline"} size="sm">
-                <Link href="/products">Tous</Link>
-              </Button>
-              {categories.map((category) => (
-                <Button key={category} asChild variant={params.category === category ? "default" : "outline"} size="sm">
-                  <Link href={`/products?category=${encodeURIComponent(category)}`}>{category}</Link>
+            <div className="mb-10 p-6 rounded-xl bg-gradient-to-br from-card to-card/50 border border-border/50 shadow-lg">
+              <div className="flex flex-wrap items-center gap-3">
+                <div className="flex items-center gap-2 text-sm font-bold text-foreground mr-2">
+                  <div className="p-2 rounded-lg bg-primary/10">
+                    <Filter className="h-4 w-4 text-primary" />
+                  </div>
+                  <span>Catégories:</span>
+                </div>
+                <Button 
+                  asChild 
+                  variant={!params.category ? "default" : "outline"} 
+                  size="sm"
+                  className={!params.category ? "shadow-md" : "hover:bg-primary/5"}
+                >
+                  <Link href="/products">Tous</Link>
                 </Button>
-              ))}
+                {categories.map((category) => (
+                  <Button 
+                    key={category} 
+                    asChild 
+                    variant={params.category === category ? "default" : "outline"} 
+                    size="sm"
+                    className={params.category === category ? "shadow-md" : "hover:bg-primary/5"}
+                  >
+                    <Link href={`/products?category=${encodeURIComponent(category)}`}>{category}</Link>
+                  </Button>
+                ))}
+              </div>
             </div>
 
             {/* Products Grid */}
@@ -69,39 +84,52 @@ export default async function ProductsPage({
                 {products.map((product) => (
                   <Card
                     key={product.id}
-                    className="border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg overflow-hidden group"
+                    className="border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 overflow-hidden group bg-gradient-to-br from-card to-card/80"
                   >
-                    <Link href={`/products/${product.id}`}>
-                      <div className="aspect-square relative overflow-hidden bg-secondary/30">
+                    <Link href={`/products/${product.id}`} className="block">
+                      <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-secondary/30 to-accent/20">
                         <img
                           src={product.image_url || "/placeholder.svg?height=400&width=400"}
                           alt={product.name}
-                          className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                          className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                         />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        
+                        {/* Stock Badges */}
                         {product.stock <= 5 && product.stock > 0 && (
-                          <div className="absolute top-3 right-3 px-3 py-1 bg-destructive/90 text-destructive-foreground text-xs font-medium rounded-full">
+                          <div className="absolute top-3 left-3 px-3 py-1.5 bg-destructive/90 backdrop-blur-sm text-destructive-foreground text-xs font-bold rounded-full shadow-lg">
                             Stock limité
                           </div>
                         )}
                         {product.stock === 0 && (
-                          <div className="absolute top-3 right-3 px-3 py-1 bg-muted text-muted-foreground text-xs font-medium rounded-full">
+                          <div className="absolute top-3 left-3 px-3 py-1.5 bg-muted/90 backdrop-blur-sm text-muted-foreground text-xs font-bold rounded-full shadow-lg">
                             Rupture
+                          </div>
+                        )}
+                        {product.stock > 5 && (
+                          <div className="absolute top-3 right-3 px-3 py-1.5 bg-primary/90 backdrop-blur-sm text-primary-foreground text-xs font-bold rounded-full shadow-lg">
+                            En stock
                           </div>
                         )}
                       </div>
                       <CardContent className="pt-5 pb-5 space-y-3">
                         <div className="space-y-2">
-                          <p className="text-xs font-medium text-primary uppercase tracking-wide">{product.category}</p>
-                          <h3 className="text-base font-semibold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
+                          <div className="flex items-center gap-2">
+                            <div className="h-1 w-1 bg-primary rounded-full" />
+                            <p className="text-xs font-bold text-primary uppercase tracking-wider">{product.category}</p>
+                          </div>
+                          <h3 className="text-base font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
                             {product.name}
                           </h3>
                           <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
                             {product.description}
                           </p>
                         </div>
-                        <div className="flex items-center justify-between pt-2">
-                          <span className="text-xl font-bold text-primary">{product.price.toFixed(2)} €</span>
-                          <Button size="sm" variant="outline">
+                        <div className="flex items-center justify-between pt-3 border-t border-border/50">
+                          <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                            {product.price.toFixed(2)} €
+                          </span>
+                          <Button size="sm" variant="outline" className="group-hover:bg-primary group-hover:text-primary-foreground transition-all">
                             Voir détails
                           </Button>
                         </div>

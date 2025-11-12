@@ -36,44 +36,48 @@ export default function ContactPage() {
                   </p>
                 </div>
 
-                <div className="space-y-6">
-                  <Card className="border-border/50">
+                <div className="space-y-5">
+                  <Card className="border-border/50 hover:border-primary/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-card to-card/80 group">
                     <CardContent className="pt-6 pb-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <Mail className="h-6 w-6 text-primary" />
+                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg">
+                          <Mail className="h-6 w-6 text-primary group-hover:rotate-12 transition-transform" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-foreground mb-1">Email</h3>
-                          <p className="text-muted-foreground">contact@naturavie.fr</p>
+                          <h3 className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors">Email</h3>
+                          <a href="mailto:contact@naturavie.fr" className="text-muted-foreground hover:text-primary transition-colors">
+                            contact@naturavie.fr
+                          </a>
                         </div>
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="border-border/50">
+                  <Card className="border-border/50 hover:border-primary/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-card to-card/80 group">
                     <CardContent className="pt-6 pb-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <Phone className="h-6 w-6 text-primary" />
+                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg">
+                          <Phone className="h-6 w-6 text-primary group-hover:rotate-12 transition-transform" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-foreground mb-1">Téléphone</h3>
-                          <p className="text-muted-foreground">+33 1 23 45 67 89</p>
+                          <h3 className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors">Téléphone</h3>
+                          <a href="tel:+33123456789" className="text-muted-foreground hover:text-primary transition-colors">
+                            +33 1 23 45 67 89
+                          </a>
                         </div>
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="border-border/50">
+                  <Card className="border-border/50 hover:border-primary/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-card to-card/80 group">
                     <CardContent className="pt-6 pb-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <MapPin className="h-6 w-6 text-primary" />
+                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg">
+                          <MapPin className="h-6 w-6 text-primary group-hover:rotate-12 transition-transform" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-foreground mb-1">Adresse</h3>
-                          <p className="text-muted-foreground">
+                          <h3 className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors">Adresse</h3>
+                          <p className="text-muted-foreground leading-relaxed">
                             123 Rue de la Nature
                             <br />
                             75001 Paris, France
@@ -83,15 +87,15 @@ export default function ContactPage() {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-border/50">
+                  <Card className="border-border/50 hover:border-primary/50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-card to-card/80 group">
                     <CardContent className="pt-6 pb-6">
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <Clock className="h-6 w-6 text-primary" />
+                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg">
+                          <Clock className="h-6 w-6 text-primary group-hover:rotate-12 transition-transform" />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-foreground mb-1">Horaires</h3>
-                          <p className="text-muted-foreground">
+                          <h3 className="font-bold text-foreground mb-1 group-hover:text-primary transition-colors">Horaires</h3>
+                          <p className="text-muted-foreground leading-relaxed">
                             Lundi - Vendredi: 9h00 - 18h00
                             <br />
                             Samedi: 10h00 - 16h00

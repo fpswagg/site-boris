@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { ScrollToTop } from "@/components/scroll-to-top"
 import "./globals.css"
 
 const poppins = Poppins({
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="fr">
       <body className={`${poppins.variable} font-sans antialiased`}>
         {children}
+        <ScrollToTop />
         <Analytics />
       </body>
     </html>
