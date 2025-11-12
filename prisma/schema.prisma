@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model products {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  description String
+  price       Decimal  @db.Decimal(10, 2)
+  image_url   String?
+  category    String
+  stock       Int      @default(0)
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+  updated_at  DateTime @default(now()) @db.Timestamptz(6)
+  comments    comments[]
+
+  @@index([category], name: "idx_products_category")
+}
+
+model comments {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  product     products @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  product_id  String   @db.Uuid
+  author_name String
+  author_email String
+  content     String
+  rating      Int?
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+
+  @@index([product_id], name: "idx_comments_product_id")
+}
+
+model contact_messages {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  email     String
+  subject   String
+  message   String
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model testimonials {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  author_name String
+  content     String
+  rating      Int?
+  is_featured Boolean  @default(false)
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+
+  @@index([is_featured], name: "idx_testimonials_featured")
+}
+
+model profiles {
+  id         String   @id @db.Uuid
+  email      String
+  role       String   @default("user")
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+}
+
+
